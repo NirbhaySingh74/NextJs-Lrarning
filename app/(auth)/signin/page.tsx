@@ -1,4 +1,4 @@
-import SigninComponent from "@/components/Signin";
+import { Signin as SigninComponent } from "@/components/Signin";
 
 export default function Signin() {
   return <SigninComponent />;

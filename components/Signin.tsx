@@ -1,4 +1,6 @@
-const SigninComponent = () => {
+import Button from "./Button";
+
+export const Signin = () => {
   return (
     <div className="h-screen flex justify-center flex-col">
       <div className="flex justify-center">
@@ -20,12 +22,7 @@ const SigninComponent = () => {
                 type={"password"}
                 placeholder="123456"
               />
-              <button
-                type="button"
-                className="mt-8 w-full text-white bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
-              >
-                Sign in
-              </button>
+              <Button />
             </div>
           </div>
         </a>
@@ -33,8 +30,6 @@ const SigninComponent = () => {
     </div>
   );
 };
-
-export default SigninComponent;
 
 interface LabelledInputType {
   label: string;
