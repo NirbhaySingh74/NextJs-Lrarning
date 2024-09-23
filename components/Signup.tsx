@@ -1,49 +1,86 @@
-const SignupComponent = () => {
+"use client";
+import axios from "axios";
+
+import { ChangeEventHandler, useState } from "react";
+
+export function SignupComponent() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg">
-        <h2 className="text-2xl font-bold text-center mb-6">Sign Up</h2>
-        <form className="space-y-4">
+    <div className="h-screen flex justify-center flex-col">
+      <div className="flex justify-center">
+        <a
+          href="#"
+          className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 "
+        >
           <div>
-            <label
-              htmlFor="username"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Username
-            </label>
-            <input
-              type="text"
-              id="username"
-              placeholder="username"
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              required
-            />
+            <div className="px-10">
+              <div className="text-3xl font-extrabold">Sign up</div>
+            </div>
+            <div className="pt-2">
+              <LabelledInput
+                onChange={(e) => {
+                  setUsername(e.target.value);
+                }}
+                label="Username"
+                placeholder="harkirat@gmail.com"
+              />
+              <LabelledInput
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+                label="Password"
+                type={"password"}
+                placeholder="123456"
+              />
+
+              <button
+                onClick={() => {
+                  axios.post("http://localhost:3000/api/user", {
+                    username,
+                    password,
+                  });
+                }}
+                type="button"
+                className="mt-8 w-full text-white bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
+              >
+                Sign Up
+              </button>
+            </div>
           </div>
-          <div>
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              placeholder="password"
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              required
-            />
-          </div>
-          <button
-            type="submit"
-            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          >
-            Sign Up
-          </button>
-        </form>
+        </a>
       </div>
     </div>
   );
-};
+}
 
-export default SignupComponent;
+function LabelledInput({
+  label,
+  placeholder,
+  type,
+  onChange,
+}: LabelledInputType) {
+  return (
+    <div>
+      <label className="block mb-2 text-sm text-black font-semibold pt-4">
+        {label}
+      </label>
+      <input
+        onChange={onChange}
+        type={type || "text"}
+        id="first_name"
+        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+        placeholder={placeholder}
+        required
+      />
+    </div>
+  );
+}
+
+interface LabelledInputType {
+  label: string;
+  placeholder: string;
+  type?: string;
+  onChange: ChangeEventHandler<HTMLInputElement>;
+}
