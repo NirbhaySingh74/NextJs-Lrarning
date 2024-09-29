@@ -22,7 +22,6 @@ export async function POST(req: NextRequest) {
       password: body.password,
     },
   });
-
   return Response.json({
     message: "You are logged in!",
   });
