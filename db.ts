@@ -1,7 +1,5 @@
 import { PrismaClient } from "@prisma/client";
 
-console.log("inside db.ts");
-
 const prismaClientSingleton = () => {
   console.log("prisma client instantiated");
 
